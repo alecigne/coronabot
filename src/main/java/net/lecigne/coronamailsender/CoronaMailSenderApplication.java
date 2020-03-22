@@ -1,6 +1,7 @@
 package net.lecigne.coronamailsender;
 
 import net.lecigne.coronamailsender.model.CoronaInfo;
+import net.lecigne.coronamailsender.service.CoronaMailSender;
 import net.lecigne.coronamailsender.wsc.CoronaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,9 +15,12 @@ public class CoronaMailSenderApplication implements CommandLineRunner {
 
 	final CoronaClient coronaClient;
 
+	final CoronaMailSender coronaMailSender;
+
 	@Autowired
-	public CoronaMailSenderApplication(CoronaClient coronaClient) {
+	public CoronaMailSenderApplication(CoronaClient coronaClient, CoronaMailSender coronaMailSender) {
 		this.coronaClient = coronaClient;
+		this.coronaMailSender = coronaMailSender;
 	}
 
 	public static void main(String[] args) {
@@ -26,6 +30,6 @@ public class CoronaMailSenderApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		CoronaInfo coronaInfo = coronaClient.getCoronaInfo("france");
-		System.out.println(coronaInfo.getCases());
+		coronaMailSender.sendEmail("Informations COVID-19", String.format("Nombre de cas : %d", coronaInfo.getCases()));
 	}
 }
