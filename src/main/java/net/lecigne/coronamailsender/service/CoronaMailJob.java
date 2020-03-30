@@ -25,10 +25,16 @@ public class CoronaMailJob {
 
     @Scheduled(cron = "${corona.mail.cron}", zone = "Europe/Paris")
     public void execute() {
-        log.info("Retrieving information about coronavirus");
-        CoronaInfo coronaInfo = coronaClient.getCoronaInfo("france");
+        CoronaInfo coronaInfo = null;
 
-        if (coronaInfo.getCases() != 0) {
+        try {
+            log.info("Retrieving information about coronavirus");
+            coronaInfo = coronaClient.getCoronaInfo("france");
+        } catch (Exception e) {
+            log.error("Error retrieving info");
+        }
+
+        if (coronaInfo != null && coronaInfo.getCases() != 0) {
             log.info("Sending an email");
             try {
                 coronaMailSender.sendEmail("Informations COVID-19", String.format("Nombre de cas : %d", coronaInfo.getCases()));
