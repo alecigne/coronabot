@@ -9,3 +9,5 @@ at 6 am.
 - [ ] Better error handling (API call and sending email)
 - [ ] Store recipients in a database and add them through a Web
   interface
+- [ ] Manage secret information (source email login and password,
+  recipients)
