@@ -1,4 +1,4 @@
-package net.lecigne.coronamailsender.wsc;
+package net.lecigne.coronamailsender.client;
 
 import net.lecigne.coronamailsender.model.CoronaInfo;
 import org.springframework.cloud.openfeign.FeignClient;
