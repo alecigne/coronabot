@@ -1,10 +1,12 @@
 package net.lecigne.coronamailsender.service;
 
+import net.lecigne.coronamailsender.model.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -14,24 +16,18 @@ public class CoronaMailSender {
 
     private JavaMailSender sender;
 
-    @Value("${spring.mail.username}")
-    private String from;
-
-    @Value("${corona.mail.recipients}")
-    private String[] to;
-
     @Autowired
     public CoronaMailSender(JavaMailSender sender) {
         this.sender = sender;
     }
 
-    public void sendEmail(final String subject, final String message) throws MessagingException {
+    public void sendEmail(final Mail mail) throws MessagingException {
         MimeMessage mimeMessage = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(subject);
-        helper.setText(message, true);
-        helper.setFrom(from);
-        helper.setTo(to);
+        helper.setSubject(mail.getSubject());
+        helper.setText(mail.getText(), false);
+        helper.setFrom(mail.getFrom());
+        helper.setTo(mail.getTo());
         sender.send(mimeMessage);
     }
 }

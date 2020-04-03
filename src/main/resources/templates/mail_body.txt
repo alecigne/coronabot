@@ -1,0 +1,13 @@
+Bonjour,
+
+Voici la situation du Covid-19 en [(${country})].
+
+Dans la journée d'hier [(${todayCases})] nouveaux cas et [(${todayDeaths})] nouveaux décès ont été recensés.
+
+Ces derniers chiffres portent le nombre de cas actifs à [(${active})] (dont [(${critical})] dans un état critique), le nombre total de cas à [(${cases})] et le nombre total de décès à [(${deaths})].
+
+[(${recovered})] personnes ont guéri du Covid-19 en [(${country})] depuis son apparition.
+
+Prenez soin de vous,
+
+Coronabot
