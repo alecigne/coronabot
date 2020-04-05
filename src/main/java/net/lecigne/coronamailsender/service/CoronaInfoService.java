@@ -19,10 +19,10 @@ public class CoronaInfoService {
         this.coronaClient = coronaClient;
     }
 
-    public Optional<CoronaInfo> getCoronaInfo() {
+    public Optional<CoronaInfo> getCoronaInfo(String country) {
         try {
             log.info("Retrieving information about coronavirus");
-            return Optional.of(coronaClient.getCoronaInfo("france"));
+            return Optional.of(coronaClient.getCoronaInfo(country));
         } catch (Exception e) {
             log.error("Error retrieving info");
         }

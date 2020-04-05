@@ -2,6 +2,7 @@ package net.lecigne.coronamailsender.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class CoronaJob {
     final EMailService eMailService;
     final CoronaMailBuilder coronaMailBuilder;
 
+    @Value("${corona.mail.country}")
+    private String country;
+
     @Autowired
     public CoronaJob(CoronaInfoService coronaInfoService, EMailService eMailService,
                      CoronaMailBuilder coronaMailBuilder) {
@@ -23,7 +27,7 @@ public class CoronaJob {
 
     @Scheduled(cron = "${corona.mail.cron}", zone = "Europe/Paris")
     public void execute() {
-        coronaInfoService.getCoronaInfo().ifPresent(coronaInfo -> {
+        coronaInfoService.getCoronaInfo(country).ifPresent(coronaInfo -> {
             log.info("Sending an email");
             eMailService.sendEmail(coronaMailBuilder.buildCoronaMail(coronaInfo));
         });

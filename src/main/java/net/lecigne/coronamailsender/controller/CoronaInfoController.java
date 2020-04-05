@@ -5,9 +5,7 @@ import net.lecigne.coronamailsender.model.CoronaInfo;
 import net.lecigne.coronamailsender.service.CoronaInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/corona", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -21,10 +19,10 @@ public class CoronaInfoController {
         this.coronaInfoService = coronaInfoService;
     }
 
-    @GetMapping
-    public CoronaInfo getCoronaInfo() {
+    @GetMapping("/{country}")
+    public CoronaInfo getCoronaInfo(@PathVariable(value = "country") String country) {
         log.info("GET /corona - Envoi des informations relative au COVID-19");
-        return coronaInfoService.getCoronaInfo().get();
+        return coronaInfoService.getCoronaInfo(country).get();
     }
 
 }
