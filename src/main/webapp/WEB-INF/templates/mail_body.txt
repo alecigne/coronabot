@@ -1,12 +1,12 @@
 Bonjour,
 
-Voici la situation du Covid-19 en [(${country})].
+Voici les dernières statistiques relatives au COVID-19 en [(${#strings.capitalize(country)})].
 
-Dans la journée d'hier [(${todayCases})] nouveaux cas et [(${todayDeaths})] nouveaux décès ont été recensés.
+[(${todayCases})] nouveaux cas et [(${todayDeaths})] nouveaux décès ont été recensés.
 
-Ces derniers chiffres portent le nombre de cas actifs à [(${active})] (dont [(${critical})] dans un état critique), le nombre total de cas à [(${cases})] et le nombre total de décès à [(${deaths})].
+Le nombre total de cas actifs passe donc à [(${active})], dont [(${critical})] cas critiques.
 
-[(${recovered})] personnes ont guéri du Covid-19 en [(${country})] depuis son apparition.
+Depuis le début de l'épidémie, au total [(${cases})] cas ont été détectés. Ceux-ci ont abouti à [(${deaths})] décès et [(${recovered})] guérisons.
 
 Prenez soin de vous,
 
