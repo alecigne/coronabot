@@ -1,13 +1,22 @@
 #+TITLE: Covid-19 Mail Sender
 
-This simple Spring Boot application runs on a Raspberry Pi on my local
-network. It sends Covid-19 statistics for France by email, every day
-at 6 am.
+This simple Spring Boot application sends Covid-19 statistics by
+email, every day at 6 am. It runs on a Raspberry Pi on my local
+network.
+
+* Build steps
+
+This process will be improved by using the ~gulp~ Gradle plugin.
+
+1. ~npm run build~
+2. ~gulp build~
+3. ~./gradlew clean build~
 
 * TODOs and MAYBEs
 
-- [ ] Better error handling (API call and sending email)
+- [X] Better error handling (API call and sending email)
 - [ ] Store recipients in a database and add them through a Web
   interface
 - [ ] Manage secret information (source email login and password,
   recipients)
+- [ ] Create an Angular web interface

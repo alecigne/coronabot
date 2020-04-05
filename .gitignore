@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Angular ###
+/node_modules
