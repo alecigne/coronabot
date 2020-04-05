@@ -32,7 +32,7 @@ public class CoronaMailBuilder {
 
     public Mail buildCoronaMail(CoronaInfo coronaInfo) {
         Context context = new Context();
-        Map<String, Object> model = new HashMap();
+        Map<String, Object> model = new HashMap<>();
         model.put("country", coronaInfo.getCountry());
         model.put("todayCases", coronaInfo.getTodayCases());
         model.put("todayDeaths", coronaInfo.getTodayDeaths());
