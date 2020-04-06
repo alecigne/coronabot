@@ -21,7 +21,7 @@ public class ThymeleafTemplateConfig {
     @Bean
     public SpringResourceTemplateResolver textTemplateResolver(){
         SpringResourceTemplateResolver emailTemplateResolver = new SpringResourceTemplateResolver();
-        emailTemplateResolver.setPrefix("/WEB-INF/templates/");
+        emailTemplateResolver.setPrefix("/templates/");
         emailTemplateResolver.setSuffix(".txt");
         emailTemplateResolver.setTemplateMode(TemplateMode.TEXT);
         emailTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
