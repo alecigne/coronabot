@@ -22,7 +22,7 @@ public class CoronaInfoController {
     @GetMapping("/{country}")
     public CoronaInfo getCoronaInfo(@PathVariable(value = "country") String country) {
         log.info("GET /corona/" + country);
-        return coronaInfoService.getCoronaInfo(country).get();
+        return coronaInfoService.getStoredCoronaInfo().get();
     }
 
 }
