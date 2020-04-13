@@ -2,9 +2,9 @@ Bonjour,
 
 Voici les dernières statistiques relatives au COVID-19 en [(${#strings.capitalize(country)})].
 
-[(${todayCases})] nouveaux cas et [(${todayDeaths})] nouveaux décès ont été recensés.
+Hier, [(${todayCases})] nouveaux cas et [(${todayDeaths})] nouveaux décès ont été recensés.
 
-Le nombre total de cas actifs passe donc à [(${active})], dont [(${critical})] cas critiques.
+Le nombre total de cas actifs est donc passé à [(${active})], dont [(${critical})] cas critiques.
 
 Depuis le début de l'épidémie, au total [(${cases})] cas ont été détectés. Ceux-ci ont abouti à [(${deaths})] décès et [(${recovered})] guérisons.
 
