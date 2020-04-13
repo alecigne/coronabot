@@ -45,4 +45,5 @@ public class CoronaMailBuilder {
         String text = springTemplateEngine.process("mail_body", context);
         return new Mail(from, to, subject, text);
     }
+
 }
