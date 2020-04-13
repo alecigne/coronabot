@@ -1,13 +1,8 @@
 #+TITLE: Covid-19 Mail Sender
 
-This simple Spring Boot application runs on a Raspberry Pi on my local
-network. It sends Covid-19 statistics for France by email, every day
-at 6 am.
+This Spring Boot application retrieves statistics about Covid-19 at
+the end of each day, and sends them by email the next day at 6am. It
+also offers a REST API that is meant to be consumed by an Angular
+webapp (under development).
 
-* TODOs and MAYBEs
-
-- [ ] Better error handling (API call and sending email)
-- [ ] Store recipients in a database and add them through a Web
-  interface
-- [ ] Manage secret information (source email login and password,
-  recipients)
+It runs on a Raspberry Pi 3 on my local network.
