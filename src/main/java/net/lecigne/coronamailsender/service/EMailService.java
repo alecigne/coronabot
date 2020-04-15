@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -29,7 +30,7 @@ public class EMailService {
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getText(), false);
             helper.setFrom(mail.getFrom());
-            helper.setTo(mail.getTo());
+            helper.setBcc(mail.getTo());
             sender.send(mimeMessage);
         } catch (MessagingException | MailException e) {
             log.error("Error sending Email");
