@@ -33,6 +33,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	// https://mvnrepository.com/artifact/com.icegreen/greenmail-spring
+	compile group: 'com.icegreen', name: 'greenmail-spring', version: '1.5.12'
 }
 
 dependencyManagement {
