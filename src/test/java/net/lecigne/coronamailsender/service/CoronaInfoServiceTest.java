@@ -3,6 +3,7 @@ package net.lecigne.coronamailsender.service;
 import net.lecigne.coronamailsender.client.CoronaClient;
 import net.lecigne.coronamailsender.dao.CoronaInfoDao;
 import net.lecigne.coronamailsender.model.CoronaInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +31,7 @@ class CoronaInfoServiceTest {
     void syncCoronaInfo_whenCountryMatches_ShouldStoreAndReturnInfo() {
         // Given
         String country = "france";
-        CoronaInfo expectedCoronaInfo = CoronaInfo.builder().country(country).build();
+        CoronaInfo expectedCoronaInfo = CoronaInfo.builder().country(StringUtils.capitalize(country)).build();
         when(coronaClient.getCoronaInfo(country)).thenReturn(expectedCoronaInfo);
 
         // When
@@ -47,7 +47,7 @@ class CoronaInfoServiceTest {
     void syncCoronaInfo_whenCountryDoesNotMatch_ShouldStoreNullAndReturnEmpty() {
         // Given
         String country = "france";
-        when(coronaClient.getCoronaInfo(country)).thenReturn(CoronaInfo.builder().country("germany").build());
+        when(coronaClient.getCoronaInfo(country)).thenReturn(CoronaInfo.builder().country("Germany").build());
 
         // When
         Optional<CoronaInfo> coronaInfo = coronaInfoService.syncCoronaInfo(country);

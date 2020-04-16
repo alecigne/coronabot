@@ -50,7 +50,7 @@ public class CoronaInfoService {
 
     private CoronaInfo fetchCoronaInfo(String country) {
         CoronaInfo coronaInfo = coronaClient.getCoronaInfo(country);
-        if (!country.equals(coronaInfo.getCountry())) {
+        if (!country.equalsIgnoreCase(coronaInfo.getCountry())) {
             throw new ServiceException("Country doesn't match");
         }
         return coronaInfo;
