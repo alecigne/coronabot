@@ -22,7 +22,7 @@ public class CoronaJob {
 
     @Autowired
     public CoronaJob(CoronaInfoService coronaInfoService, EMailService eMailService,
-                     CoronaMailBuilder coronaMailBuilder, CoronaClient coronaClient) {
+                     CoronaMailBuilder coronaMailBuilder) {
         this.coronaInfoService = coronaInfoService;
         this.eMailService = eMailService;
         this.coronaMailBuilder = coronaMailBuilder;
@@ -30,7 +30,7 @@ public class CoronaJob {
 
     @Scheduled(cron = "${corona.mail.cron}", zone = "Europe/Paris")
     public void executeMailJob() {
-        coronaInfoService.getStoredCoronaInfo().ifPresent(coronaInfo -> {
+        coronaInfoService.getCoronaInfo().ifPresent(coronaInfo -> {
             log.info("Sending an email");
             eMailService.sendEmail(coronaMailBuilder.buildCoronaMail(coronaInfo));
         });
@@ -38,13 +38,7 @@ public class CoronaJob {
 
     @Scheduled(cron = "${corona.sync.cron}", zone = "Europe/Paris")
     private void executeSyncingJob() {
-        coronaInfoService.fetchCoronaInfo(country).ifPresentOrElse(coronaInfo -> {
-            log.info("Syncing and storing information about coronavirus");
-            coronaInfoService.updateStoredCoronaInfo(coronaInfo);
-        }, () -> {
-            log.error("Error retrieving info - storing null");
-            coronaInfoService.updateStoredCoronaInfo(null);
-        });
+        coronaInfoService.syncCoronaInfo(country);
     }
 
 }

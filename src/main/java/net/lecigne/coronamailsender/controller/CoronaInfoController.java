@@ -22,9 +22,17 @@ public class CoronaInfoController {
     }
 
     @GetMapping
-    public ResponseEntity<CoronaInfo> getStoredCoronaInfo() {
+    public ResponseEntity<CoronaInfo> getCoronaInfo() {
         log.info("GET /corona");
-        return coronaInfoService.getStoredCoronaInfo()
+        return coronaInfoService.getCoronaInfo()
+                .map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @PutMapping(value = "/{country}")
+    public ResponseEntity<CoronaInfo> syncCoronaInfo(@PathVariable(value = "country") String country) {
+        log.info("PUT /corona/" + country);
+        return coronaInfoService.syncCoronaInfo(country)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
