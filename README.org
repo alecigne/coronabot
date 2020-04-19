@@ -1,7 +1,7 @@
 #+TITLE: Covid-19 Mail Sender
 
-[[https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=feature-travis][https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=feature-travis]]
-[[https://codecov.io/gh/alecigne/covid19-mail-sender/branch/feature-travis/graph/badge.svg][https://codecov.io/gh/alecigne/covid19-mail-sender/branch/feature-travis/graph/badge.svg]]
+[[https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=master][https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=master]]
+[[https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg][https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg]]
 
 This Spring Boot application retrieves statistics about Covid-19 at
 the end of each day, and sends them by email the next day at 6am. It
