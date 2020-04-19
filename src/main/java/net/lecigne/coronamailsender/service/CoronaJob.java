@@ -14,7 +14,7 @@ public class CoronaJob {
 
     final CoronaInfoService coronaInfoService;
 
-    final EMailService eMailService;
+    final EmailService eMailService;
 
     final CoronaMailBuilder coronaMailBuilder;
 
@@ -22,7 +22,7 @@ public class CoronaJob {
     private String country;
 
     @Autowired
-    public CoronaJob(CoronaInfoService coronaInfoService, EMailService eMailService,
+    public CoronaJob(CoronaInfoService coronaInfoService, EmailService eMailService,
                      CoronaMailBuilder coronaMailBuilder) {
         this.coronaInfoService = coronaInfoService;
         this.eMailService = eMailService;

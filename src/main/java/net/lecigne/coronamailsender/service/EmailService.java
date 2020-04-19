@@ -13,12 +13,12 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 @Slf4j
-public class EMailService {
+public class EmailService {
 
     private JavaMailSender sender;
 
     @Autowired
-    public EMailService(JavaMailSender sender) {
+    public EmailService(JavaMailSender sender) {
         this.sender = sender;
     }
 
@@ -31,9 +31,10 @@ public class EMailService {
             helper.setFrom(mail.getFrom());
             helper.setBcc(mail.getTo());
             sender.send(mimeMessage);
+            log.info("Email sent successfully");
         } catch (MessagingException | MailException e) {
             log.error("Error sending Email");
         }
-        log.info("Email sent successfully");
     }
+
 }

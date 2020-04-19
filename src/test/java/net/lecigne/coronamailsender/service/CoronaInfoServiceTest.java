@@ -2,6 +2,7 @@ package net.lecigne.coronamailsender.service;
 
 import net.lecigne.coronamailsender.client.CoronaClient;
 import net.lecigne.coronamailsender.dao.CoronaInfoDao;
+import net.lecigne.coronamailsender.exception.DataAccessException;
 import net.lecigne.coronamailsender.model.CoronaInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -56,4 +57,17 @@ class CoronaInfoServiceTest {
         assertThat(coronaInfo).isEmpty();
         verify(coronaInfoDao, times(1)).updateCoronaInfo(null);
     }
+
+    @Test
+    void getCoronaInfo_whenDataAccesException_shouldReturnEmptyOptional() {
+        // Given
+        when(coronaInfoDao.getCoronaInfo()).thenThrow(new DataAccessException("error"));
+
+        // When
+        Optional<CoronaInfo> coronaInfo = coronaInfoService.getCoronaInfo();
+
+        // Then
+        assertThat(coronaInfo).isEmpty();
+    }
+
 }

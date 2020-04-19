@@ -25,12 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class EMailServiceTest {
+class EmailServiceIntegrationTest {
 
     private GreenMail greenMail;
 
     @Autowired
-    EMailService eMailService;
+    EmailService eMailService;
 
     @BeforeEach
     void setUp() {
