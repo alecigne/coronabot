@@ -4,8 +4,47 @@
 [[https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg][https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg]]
 
 This Spring Boot application retrieves statistics about Covid-19 at
-the end of each day, and sends them by email the next day at 6am. It
-also offers a REST API that is meant to be consumed by an Angular
-webapp (under development).
+the end of each day (11:55 p.m. local time), and sends them by email
+the next morning (6:00 a.m. local time).
 
-It runs on a Raspberry Pi 3 on my local network.
+It runs on a Raspberry Pi 3 on my local network and keeps my relative
+informed about the current pandemic without being subjected to
+anxiety-inducing news.
+
+* How to use
+
+1. Download a JAR from the [[https://github.com/alecigne/covid19-mail-sender/releases][releases section]] of the repo. You can also
+   build the application by running =./gradlew clean build=. The JAR
+   should be located in =build/libs=.
+
+2. In the directory containing the JAR, create a file named
+   =application.properties= and set these properties to your own
+   values:
+
+   #+begin_src yaml
+     spring.mail.host=smtp.gmail.com
+     spring.mail.port=587
+     spring.mail.username=john.doe@gmail.com
+     spring.mail.password=mypassword
+     corona.mail.recipients=mom@gmail.com, dad@protonmail.com
+   #+end_src
+
+   You can also customize other email-related parameters such as the
+   target country, the email subject and the time at which the daily
+   mail will be sent:
+
+   #+begin_src yaml
+     corona.mail.country=france
+     corona.mail.subject=Informations COVID-19
+     corona.mail.cron=0 0 6 * * ?
+   #+end_src
+
+3. Run the JAR (you need Java 11):
+
+   #+begin_src bash
+     java -jar [jar-file]
+   #+end_src
+
+On startup, the application will fetch the COVID statistics for the
+current day. You can see the data by accessing
+=localhost:8080/corona=.
