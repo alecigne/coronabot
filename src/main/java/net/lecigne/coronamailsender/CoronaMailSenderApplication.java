@@ -12,8 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Slf4j
 public class CoronaMailSenderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CoronaMailSenderApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CoronaMailSenderApplication.class, args);
+    }
 
 }
