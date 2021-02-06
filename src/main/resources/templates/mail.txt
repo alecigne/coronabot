@@ -1,0 +1,17 @@
+Bonjour,
+
+Voici les statistiques relatives au COVID-19 pour la journée d'hier.
+
+En [(${#strings.capitalize(country)})] :
+
+- [(${countryCases})] nouveaux cas
+- [(${countryDeaths})] nouveaux décès
+
+Dans le monde :
+
+- [(${worldCases})] nouveaux cas
+- [(${worldDeaths})] nouveaux décès
+
+Prenez soin de vous,
+
+Coronabot

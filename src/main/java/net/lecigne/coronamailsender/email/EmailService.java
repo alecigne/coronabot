@@ -1,7 +1,6 @@
-package net.lecigne.coronamailsender.service;
+package net.lecigne.coronamailsender.email;
 
 import lombok.extern.slf4j.Slf4j;
-import net.lecigne.coronamailsender.model.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,25 +10,28 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Send emails.
+ */
 @Service
 @Slf4j
 public class EmailService {
 
-    private JavaMailSender sender;
+    private final JavaMailSender sender;
 
     @Autowired
     public EmailService(JavaMailSender sender) {
         this.sender = sender;
     }
 
-    public void sendEmail(final Mail mail) {
+    public void send(final Email email) {
         MimeMessage mimeMessage = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
-            helper.setSubject(mail.getSubject());
-            helper.setText(mail.getText(), false);
-            helper.setFrom(mail.getFrom());
-            helper.setBcc(mail.getTo());
+            helper.setSubject(email.getSubject());
+            helper.setText(email.getText(), false);
+            helper.setFrom(email.getFrom());
+            helper.setBcc(email.getTo());
             sender.send(mimeMessage);
             log.info("Email sent successfully");
         } catch (MessagingException | MailException e) {
