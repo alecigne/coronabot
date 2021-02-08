@@ -1,8 +1,11 @@
 package net.lecigne.coronamailsender.coronareport;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
+import net.lecigne.coronamailsender.coronainfo.CoronaInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +14,14 @@ import java.util.Map;
  * COVID-19 statistics about multiple entities: a country and the world.
  */
 @Builder
-@Getter
+@Value
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CoronaReport {
-    private final String country;
-    private final long countryCases;
-    private final long countryDeaths;
-    private final long worldCases;
-    private final long worldDeaths;
+    String country;
+    long countryCases;
+    long countryDeaths;
+    long worldCases;
+    long worldDeaths;
 
     @JsonIgnore
     public Map<String, Object> getModel() {
@@ -28,5 +32,15 @@ public class CoronaReport {
         model.put("worldCases", String.format("%,d", this.worldCases));
         model.put("worldDeaths", String.format("%,d", this.worldDeaths));
         return model;
+    }
+
+    public static CoronaReport fromCoronaInfo(CoronaInfo countryInfo, CoronaInfo worldInfo) {
+        return CoronaReport.builder()
+                .country(countryInfo.getCountry())
+                .countryCases(countryInfo.getTodayCases())
+                .countryDeaths(countryInfo.getTodayDeaths())
+                .worldCases(worldInfo.getTodayCases())
+                .worldDeaths(worldInfo.getTodayDeaths())
+                .build();
     }
 }

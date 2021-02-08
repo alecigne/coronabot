@@ -19,8 +19,8 @@ public class CoronaMailBuilder {
     private final String subject;
 
     @Autowired
-    public CoronaMailBuilder(SpringTemplateEngine springTemplateEngine, @Value("${spring.mail.username}") String from
-            , @Value("${corona.mail.recipients}") String[] to, @Value("${corona.mail.subject}") String subject) {
+    public CoronaMailBuilder(SpringTemplateEngine springTemplateEngine, @Value("${spring.mail.username}") String from,
+                             @Value("${corona.mail.recipients}") String[] to, @Value("${corona.mail.subject}") String subject) {
         this.springTemplateEngine = springTemplateEngine;
         this.from = from;
         this.to = to;

@@ -21,5 +21,4 @@ public class CoronaReportDao {
     public void update(CoronaReport coronaReport) {
         this.coronaReport = coronaReport;
     }
-
 }

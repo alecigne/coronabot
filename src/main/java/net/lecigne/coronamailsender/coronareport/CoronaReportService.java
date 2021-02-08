@@ -54,13 +54,7 @@ public class CoronaReportService {
         try {
             CoronaInfo countryInfo = coronaInfoClient.getCoronaInfo(country.toLowerCase());
             CoronaInfo worldInfo = coronaInfoClient.getCoronaInfo("world");
-            CoronaReport report = CoronaReport.builder()
-                    .country(country)
-                    .countryCases(countryInfo.getTodayCases())
-                    .countryDeaths(countryInfo.getTodayDeaths())
-                    .worldCases(worldInfo.getTodayCases())
-                    .worldDeaths(worldInfo.getTodayDeaths())
-                    .build();
+            CoronaReport report = CoronaReport.fromCoronaInfo(countryInfo, worldInfo);
             updateCoronaReport(report);
             return Optional.of(report);
         } catch (Exception e) {
@@ -78,5 +72,4 @@ public class CoronaReportService {
             eMailService.send(email);
         }, () -> log.warn("Email not sent - empty report"));
     }
-
 }

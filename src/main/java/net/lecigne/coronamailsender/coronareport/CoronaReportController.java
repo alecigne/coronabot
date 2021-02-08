@@ -51,5 +51,4 @@ public class CoronaReportController {
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(INTERNAL_SERVER_ERROR));
     }
-
 }

@@ -1,23 +1,26 @@
 package net.lecigne.coronamailsender.coronainfo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
 /**
  * COVID-19 statistics for a specific entity (a country or the world).
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-@Getter
+@Value
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CoronaInfo {
-    private final String country;
-    private final long cases;
-    private final long todayCases;
-    private final long deaths;
-    private final long todayDeaths;
-    private final long recovered;
-    private final long active;
-    private final long critical;
-    private final long casesPerOneMillion;
+    String country;
+    long cases;
+    long todayCases;
+    long deaths;
+    long todayDeaths;
+    long recovered;
+    long active;
+    long critical;
+    long casesPerOneMillion;
 }

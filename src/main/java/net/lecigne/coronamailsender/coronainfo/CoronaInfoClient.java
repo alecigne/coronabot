@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @FeignClient(value = "coronaClient", url = "https://coronavirus-19-api.herokuapp.com")
 public interface CoronaInfoClient {
-
     @GetMapping(value = "/countries/{country}")
     CoronaInfo getCoronaInfo(@PathVariable("country") String country);
-
 }
