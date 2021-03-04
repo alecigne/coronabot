@@ -5,13 +5,13 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Source: https://github.com/thombergs
- * Direct access to the file: https://git.io/JvjQL
- */
 public class ResponseBodyMatchers {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    static ResponseBodyMatchers responseBody() {
+        return new ResponseBodyMatchers();
+    }
 
     public <T> ResultMatcher containsObjectAsJson(Object expectedObject, Class<T> targetClass) {
         return mvcResult -> {
@@ -19,10 +19,6 @@ public class ResponseBodyMatchers {
             T actualObject = objectMapper.readValue(json, targetClass);
             assertThat(expectedObject).isEqualToComparingFieldByField(actualObject);
         };
-    }
-
-    static ResponseBodyMatchers responseBody() {
-        return new ResponseBodyMatchers();
     }
 
 }

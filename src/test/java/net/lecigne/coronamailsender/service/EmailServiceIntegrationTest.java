@@ -6,7 +6,8 @@ import com.icegreen.greenmail.store.StoredMessage;
 import com.icegreen.greenmail.user.GreenMailUser;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetupTest;
-import net.lecigne.coronamailsender.model.Mail;
+import net.lecigne.coronamailsender.email.Email;
+import net.lecigne.coronamailsender.email.EmailService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,10 +27,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @RunWith(SpringRunner.class)
 class EmailServiceIntegrationTest {
 
-    private GreenMail greenMail;
-
     @Autowired
     EmailService eMailService;
+    private GreenMail greenMail;
 
     @BeforeEach
     void setUp() {
@@ -44,7 +43,7 @@ class EmailServiceIntegrationTest {
     }
 
     @Test
-    void sendEmail() throws MessagingException, IOException, FolderException {
+    void sendEmail() throws MessagingException, FolderException {
         // Given
         final String from = "no-reply@coronabot.net";
         final String recipient1Email = "recipient1@gmail.com";
@@ -52,14 +51,14 @@ class EmailServiceIntegrationTest {
         final String subject = "Informations COVID-19";
         final String content = "content";
 
-        Mail mail = Mail.builder().from(from).to(new String[]{recipient1Email, recipient2Email})
+        Email email = Email.builder().from(from).to(new String[]{recipient1Email, recipient2Email})
                 .subject(subject).text(content).build();
 
         GreenMailUser recipient1 = greenMail.setUser("recipient1@gmail.com", null);
         GreenMailUser recipient2 = greenMail.setUser("recipient2@gmail.com", null);
 
         // When
-        eMailService.sendEmail(mail);
+        eMailService.send(email);
 
         // Then
         assertEquals(2, greenMail.getReceivedMessages().length);
