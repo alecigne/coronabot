@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'net.lecigne'
-version = '0.1.2-SNAPSHOT'
+version = '0.2.0-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {

@@ -8,6 +8,7 @@ import lombok.Value;
 import net.lecigne.coronamailsender.coronainfo.CoronaInfo;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -27,11 +28,15 @@ public class CoronaReport {
     public Map<String, Object> getModel() {
         Map<String, Object> model = new HashMap<>();
         model.put("country", this.country);
-        model.put("countryCases", String.format("%,d", this.countryCases));
-        model.put("countryDeaths", String.format("%,d", this.countryDeaths));
-        model.put("worldCases", String.format("%,d", this.worldCases));
-        model.put("worldDeaths", String.format("%,d", this.worldDeaths));
+        model.put("countryCases", formatCases(countryCases));
+        model.put("countryDeaths", formatCases(countryDeaths));
+        model.put("worldCases", formatCases(worldCases));
+        model.put("worldDeaths", formatCases(worldDeaths));
         return model;
+    }
+
+    private String formatCases(long cases) {
+        return String.format(Locale.FRANCE, "%,d", cases);
     }
 
     public static CoronaReport fromCoronaInfo(CoronaInfo countryInfo, CoronaInfo worldInfo) {
