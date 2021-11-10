@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class EmailServiceIntegrationTest {
+class EmailServiceIntegrationIT {
 
     @Autowired
     EmailService eMailService;
