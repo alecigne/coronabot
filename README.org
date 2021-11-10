@@ -1,8 +1,5 @@
 #+TITLE: Covid-19 Mail Sender
 
-[[https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=master][https://travis-ci.com/alecigne/covid19-mail-sender.svg?branch=master]]
-[[https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg][https://codecov.io/gh/alecigne/covid19-mail-sender/branch/master/graph/badge.svg]]
-
 This Spring Boot application retrieves statistics about Covid-19 at
 the end of each day (11:55 p.m. local time), and sends them by email
 the next morning (6:00 a.m. local time).
@@ -13,13 +10,13 @@ anxiety-inducing news.
 
 * How to use
 
-1. Download a JAR from the [[https://github.com/alecigne/covid19-mail-sender/releases][releases section]] of the repo. You can also
-   build the application by running =./gradlew clean build=. The JAR
-   should be located in =build/libs=.
+1. Download a JAR from the [[https://github.com/alecigne/covid19-mail-sender/releases][releases section]] of the repo.
 
-2. In the directory containing the JAR, create a file named
-   =application.properties= and set these properties to your own
-   values:
+   You can also build the application by running =./gradlew clean
+   build=; the JAR should be located in =build/libs=.
+
+2. Alongside the JAR, create a file named =application.properties= and
+   set these properties to your own values:
 
    #+begin_src yaml
      spring.mail.host=smtp.gmail.com
