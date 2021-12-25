@@ -1,13 +1,13 @@
 package net.lecigne.coronamailsender.coronareport;
 
 import lombok.extern.slf4j.Slf4j;
+import net.lecigne.coronamailsender.config.ReportConfig;
 import net.lecigne.coronamailsender.coronainfo.CoronaInfo;
 import net.lecigne.coronamailsender.coronainfo.CoronaInfoClient;
 import net.lecigne.coronamailsender.email.CoronaMailBuilder;
 import net.lecigne.coronamailsender.email.Email;
 import net.lecigne.coronamailsender.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,17 +26,17 @@ public class CoronaReportService {
     private final CoronaInfoClient coronaInfoClient;
     private final EmailService eMailService;
     private final CoronaMailBuilder coronaMailBuilder;
-    private final String country;
+    private final ReportConfig reportConfig;
 
     @Autowired
     public CoronaReportService(CoronaReportDao coronaReportDao, CoronaInfoClient coronaClient,
                                EmailService emailService, CoronaMailBuilder coronaMailBuilder,
-                               @Value("${corona.mail.country}") String country) {
+                               ReportConfig reportConfig) {
         this.coronaReportDao = coronaReportDao;
         this.coronaInfoClient = coronaClient;
         this.eMailService = emailService;
         this.coronaMailBuilder = coronaMailBuilder;
-        this.country = country;
+        this.reportConfig = reportConfig;
     }
 
     public Optional<CoronaReport> getCoronaReport() {
@@ -48,11 +48,11 @@ public class CoronaReportService {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    @Scheduled(cron = "${corona.sync.cron}", zone = "Europe/Paris")
+    @Scheduled(cron = "#{reportConfig.getSyncCron()}")
     public Optional<CoronaReport> updateCoronaReport() {
         log.info("Updating the COVID-19 report with today's data");
         try {
-            CoronaInfo countryInfo = coronaInfoClient.getCoronaInfo(country.toLowerCase());
+            CoronaInfo countryInfo = coronaInfoClient.getCoronaInfo(reportConfig.getCountry());
             CoronaInfo worldInfo = coronaInfoClient.getCoronaInfo("world");
             CoronaReport report = CoronaReport.fromCoronaInfo(countryInfo, worldInfo);
             updateCoronaReport(report);
@@ -64,7 +64,7 @@ public class CoronaReportService {
         return Optional.empty();
     }
 
-    @Scheduled(cron = "${corona.mail.cron}", zone = "Europe/Paris")
+    @Scheduled(cron = "#{reportConfig.getMailCron()}")
     public void sendCoronaReport() {
         getCoronaReport().ifPresentOrElse(report -> {
             log.info("Sending an email");

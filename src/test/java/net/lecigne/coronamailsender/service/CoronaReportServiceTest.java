@@ -1,5 +1,7 @@
 package net.lecigne.coronamailsender.service;
 
+import lombok.val;
+import net.lecigne.coronamailsender.config.ReportConfig;
 import net.lecigne.coronamailsender.coronainfo.CoronaInfo;
 import net.lecigne.coronamailsender.coronainfo.CoronaInfoClient;
 import net.lecigne.coronamailsender.coronareport.CoronaReport;
@@ -48,9 +50,11 @@ class CoronaReportServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
+        val reportConfig = new ReportConfig();
+        reportConfig.setCountry("france");
         coronaReportService = new CoronaReportService(coronaReportDao, coronaClient, emailService, coronaMailBuilder,
-                "france");
+                reportConfig);
     }
 
     @Test
