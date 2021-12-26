@@ -1,6 +1,6 @@
 #+title: Coronabot
 
-[[https://github.com/alecigne/coronabot/actions/workflows/maven.yml][https://github.com/alecigne/coronabot/actions/workflows/maven.yml/badge.svg]]
+[[https://github.com/alecigne/coronabot/actions/workflows/main.yml][https://github.com/alecigne/coronabot/actions/workflows/main.yml/badge.svg]]
 
 This Spring Boot application retrieves statistics about Covid-19 and
 sends a report everyday by email.
