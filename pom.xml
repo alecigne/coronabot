@@ -19,7 +19,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
-        <failsafe.version>3.0.0</failsafe.version>
+        <failsafe.version>3.1.0</failsafe.version>
     </properties>
 
     <dependencyManagement>
